@@ -1,9 +1,15 @@
-To execute the game.
 
-git clone repo. 
+# To execute the game
 
-cd minesweeper. 
+* clone the repo
+* cd minesweeper
+* bundle install
+* ruby game.rb
 
-bundle. 
 
-ruby game.rb. 
+# To execute test suites
+
+* clone the repo
+* cd minesweeper
+* bundle install
+* rspec --format documentation
