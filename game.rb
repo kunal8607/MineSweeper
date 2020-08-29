@@ -6,17 +6,17 @@ puts '++++++++++++++++++++++++++++'
 print 'provide value height of board: '
 height = gets.chomp.to_i
 print "\n"
-print  'provide value width of board: '
+print 'provide value width of board: '
 width = gets.chomp.to_i
 print "\n"
-print  'provide munber of mines to want to put in board: '
+print 'provide munber of mines to want to put in board: '
 num_mines = gets.chomp.to_i
 print "\n"
 board = Minesweeper.new(height, width, num_mines)
 puts 'Board before processing'
 board.print_board_preety
 
-puts "==========================================="
+puts '==========================================='
 board.calculate_board
 puts 'Board after processing'
 board.print_board_preety

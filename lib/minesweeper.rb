@@ -7,6 +7,7 @@ class Minesweeper
     unless self.class.validate_inputs?(rows, cols, mines)
       raise ArgumentError, 'privided height and width can not accumulate the given mines'
     end
+
     fill_mines_in_board(mines)
   end
 
@@ -35,6 +36,7 @@ class Minesweeper
     @board.each_with_index do |row_val, row|
       row_val.each_with_index do |col_val, col|
         next unless col_val == 0
+
         count = get_count(row, col)
         @board[row][col] = count if count > 0
       end
