@@ -1,20 +1,10 @@
-#
-# Complete the 'show_board' function below.
-#
-# The function is expected to return a STRING.
-# The function accepts following parameters:
-#  1. INTEGER height
-#  2. INTEGER widthArray.new(x) {Array.new(y,0)}
-#  3. INTEGER num_mines
-#
-
 class Minesweeper
   attr_accessor :board
   def initialize(rows, cols, mines)
     @board = Array.new(rows) do |_i|
       Array.new(cols, 0)
     end
-    unless validate_inputs?(rows, cols, mines)
+    unless self.class.validate_inputs?(rows, cols, mines)
       raise ArgumentError, 'privided height and width can not accumulate the given mines'
     end
 
@@ -53,26 +43,26 @@ class Minesweeper
     end
   end
 
-  def get_count(row, col)
-    get_surrounding_vals(row, col).count('X')
-  end
+  private
 
   def get_surrounding_vals(x, y)
-    up = valid_coodinates(x - 1, y) ? @board[x - 1][y] : nil
-    down = valid_coodinates(x + 1, y) ? @board[x + 1][y] : nil
-    right = valid_coodinates(x, y + 1) ? @board[x][y + 1] : nil
-    left = valid_coodinates(x, y - 1) ? @board[x][y - 1] : nil
+    up = valid_coordinates?(x - 1, y) ? @board[x - 1][y] : nil
+    down = valid_coordinates?(x + 1, y) ? @board[x + 1][y] : nil
+    right = valid_coordinates?(x, y + 1) ? @board[x][y + 1] : nil
+    left = valid_coordinates?(x, y - 1) ? @board[x][y - 1] : nil
 
     [up, down, left, right]
   end
 
-  private
+  def valid_coordinates?(x, y)
+    x.between?(0, @board.size - 1) && y.between?(0, @board[x].size - 1)
+  end
 
-  def validate_inputs?(rows, cols, mines)
+  def self.validate_inputs?(rows, cols, mines)
     rows * cols >= mines
   end
 
-  def valid_coodinates(x, y)
-    x.between?(0, @board.size - 1) && y.between?(0, @board[x].size - 1)
+  def get_count(row, col)
+    get_surrounding_vals(row, col).count('X')
   end
 end
