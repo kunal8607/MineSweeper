@@ -1,8 +1,3 @@
-#!/bin/ruby
-
-require 'json'
-require 'stringio'
-
 #
 # Complete the 'show_board' function below.
 #
@@ -13,13 +8,12 @@ require 'stringio'
 #  3. INTEGER num_mines
 #
 
-#------ CLASS BEGIN ----
 class Minesweeper
   attr_accessor :board
   def initialize(rows, cols, mines)
     # arr = Array.new(cols, 0)
     @board = Array.new(rows) do |_i|
-      i = Array.new(cols, 0)
+      Array.new(cols, 0)
     end
     num_inserts = 0
     while num_inserts < mines
@@ -71,8 +65,6 @@ class Minesweeper
   end
 end
 
-#----- CLASS END
-
 def show_board(height, width, num_mines)
   mineboard = Minesweeper.new(height, width, num_mines)
   puts 'Board before processing'
@@ -82,17 +74,10 @@ def show_board(height, width, num_mines)
   mineboard.print_board_preety
 end
 
-fptr = File.open(ENV['OUTPUT_PATH'], 'w')
+# height = 4
 
-height = 4
+# width = 4
 
-width = 4
+# num_mines = 3
 
-num_mines = 3
-
-result = show_board height, width, num_mines
-
-fptr.write result
-fptr.write "\n"
-
-fptr.close
+# result = show_board height, width, num_mines
