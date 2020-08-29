@@ -64,20 +64,3 @@ class Minesweeper
     x.between?(0, @board.size - 1) && y.between?(0, @board[x].size - 1)
   end
 end
-
-def show_board(height, width, num_mines)
-  mineboard = Minesweeper.new(height, width, num_mines)
-  puts 'Board before processing'
-  mineboard.print_board_preety
-  mineboard.calculate_board
-  puts 'Board after processing'
-  mineboard.print_board_preety
-end
-
-# height = 4
-
-# width = 4
-
-# num_mines = 3
-
-# result = show_board height, width, num_mines
