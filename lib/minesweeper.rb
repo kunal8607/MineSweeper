@@ -11,21 +11,27 @@
 class Minesweeper
   attr_accessor :board
   def initialize(rows, cols, mines)
-    # arr = Array.new(cols, 0)
     @board = Array.new(rows) do |_i|
       Array.new(cols, 0)
     end
-    num_inserts = 0
-    while num_inserts < mines
-      ran_row = rand(rows)
-      ran_col = rand(cols)
+    unless validate_inputs?(rows, cols, mines)
+      raise ArgumentError, 'privided height and width can not accumulate the given mines'
+    end
 
+    fill_mines_in_board(mines)
+  end
+
+  def fill_mines_in_board(number_of_mines)
+    num_inserts = 0
+    while num_inserts < number_of_mines
+      ran_row = rand(@board.size)
+      ran_col = rand(@board.first.size)
       if @board[ran_row][ran_col] == 0
         @board[ran_row][ran_col] = 'X'
         num_inserts += 1
       end
     end
-  end
+    end
 
   def print_board_preety
     @board.each do |row|
@@ -51,13 +57,19 @@ class Minesweeper
     get_surrounding_vals(row, col).count('X')
   end
 
-  def get_surrounding_vals(x, y) # (2,2)
+  def get_surrounding_vals(x, y)
     up = valid_coodinates(x - 1, y) ? @board[x - 1][y] : nil
     down = valid_coodinates(x + 1, y) ? @board[x + 1][y] : nil
     right = valid_coodinates(x, y + 1) ? @board[x][y + 1] : nil
     left = valid_coodinates(x, y - 1) ? @board[x][y - 1] : nil
 
     [up, down, left, right]
+  end
+
+  private
+
+  def validate_inputs?(rows, cols, mines)
+    rows * cols >= mines
   end
 
   def valid_coodinates(x, y)
