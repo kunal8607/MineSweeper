@@ -6,6 +6,7 @@ describe Minesweeper do
   it 'should raise exception if provided height and width can not accumulate provided mines' do
     expect { Minesweeper.new(2, 2, 9) }.to raise_error(ArgumentError)
   end
+
   it 'should have a board containing provided mines count' do
     count = 0
     subject.board.each do |i|
@@ -26,10 +27,12 @@ describe Minesweeper do
     expect(subject.board.size).to eql(10)
     expect(subject.board.first.size).to eql(12)
   end
+
   describe 'Board' do
     before do
       subject.board = [[0, 0, 'X', 0], [0, 0, 0, 0], [0, 'X', 'X', 0]]
     end
+
     describe '#valid_coordinates?' do
       it 'should return false in case of invalid corrdinates' do
         expect(subject.send(:valid_coordinates?, -1, 6)).to eql(false)
